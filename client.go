@@ -69,6 +69,7 @@ func NewClient(ctx context.Context, options ...ClientOption) (*Client, error) {
 	}
 
 	client.hc = client.oc.Client(ctx, client.token)
+	client.hc.Transport = &Transport{RoundTripper: client.hc.Transport}
 
 	return client, nil
 }
